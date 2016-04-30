@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -5,6 +9,7 @@
 	<meta charset="utf-8">
 	<!--<link rel="stylesheet" type="text/css" href="styles/style.css">!-->
 	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style-article.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="menu.js"></script>
@@ -18,6 +23,9 @@
 			for(var i = 0; i < arr.events.length; i++){
 				$('#events').append('<li><a href="#" data-id="' + i + '" onclick="selectEvent(this)" >'+arr.events[i]['conference']+'</a></li>');
 			}
+		$("#logBtn").click(function(){
+        	$("#logModal").modal();
+		});
 		});
 		function selectEvent(identifier) {
 			var id = $(identifier).attr("data-id");
@@ -92,6 +100,9 @@
 			var text = JSON.stringify(annotations);
 			alert(text);
 		}
+		//$("#logBtn").click(function(){
+      //  	$("#logModal").modal();
+		//});
 	</script>
 	<script id="data" type=”application/ld+json”>
 	{ 
@@ -206,8 +217,13 @@
 					</div>
 					<div class="collapse navbar-collapse">
 					  <ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						<?php if(isset($_SESSION['username'])){ ?>
+							<li><a href="#"><?php echo $_SESSION['username'] ?></a></li>
+							<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+						<?php } else { ?>
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+							<li><a href="#" id="logBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						<?php } ?>
 					  </ul>
 					</div>
 				  </div>
@@ -225,6 +241,38 @@
 			</div>
 		</div>
 		!-->
+		
+		<!-- LOGIN !-->
+		<div class="modal fade" id="logModal" role="dialog">
+    	<div class="modal-dialog">
+					<!-- Modal content-->
+        	<div class="modal-content">
+          	<div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        		</div>
+						<div class="modal-body">
+							<form  role="form" action="login.php" method="post">
+								<div class="form-group">
+									<label for="usr"><span class="glyphicon glyphicon-user"></span> Username</label>
+									<input type="email" name="usr" class="form-control" id="usrname" placeholder="Enter email" required autofocus>
+								</div>
+								<div class="form-group">
+									<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+									<input type="password" name="psw" class="form-control" id="psw" placeholder="Enter password" required>
+								</div>
+								<div class="checkbox">
+									<label><input type="checkbox" value="" checked>Remember me</label>
+								</div>
+								<button type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<p>Not a member? <a href="#">Sign Up</a></p>
+						</div>
+					</div>
+				</div>
+			</div> 
 		<!-- BODY !-->
 		<div class="row">
 			<!-- ASIDE !-->
