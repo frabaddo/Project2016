@@ -204,11 +204,11 @@ prefix="
             <!-- ASIDE !-->
         	 <div style="z-index: 1001" class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 			<div class="dropdown">
-                    		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        		Select events
-                        		<span class="caret"></span>
-                    		</button>
-                    		<ul id="events" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Select events
+					<span class="caret"></span>
+				</button>
+				<ul id="events" class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					<li class="dropdown-header">Events</li>
 				</ul>
 			</div>
@@ -251,7 +251,7 @@ prefix="
                 </nav>
                 <!-- PAPERDIV !-->
                 <div id="RASHhead"></div>
-                <div class="col-sm-9 col-md-9 col-lg-9" id="paperdiv"></div>
+                <div id="paperdiv" class="col-sm-9 col-md-9 col-lg-9" onmouseup="Highlight()"></div>
             </div>
             <!-- Modal -->
             <div id="createAnnotation" class="modal fade" role="dialog">
