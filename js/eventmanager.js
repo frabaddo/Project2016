@@ -27,9 +27,8 @@ $(function () {
 			var text = $("#data").html();
 			arr = JSON.parse(text);
 			//alert(arr.events[0]['conference']);
-			for(var i = 0; i < arr.events.length; i++){
+			for(var i = 0; i < arr.events.length; i++)
 				$('#events').append('<li><a href="#" data-id="' + i + '" onclick="selectEvent(this)" >'+arr.events[i]['conference']+'</a></li>');
-			}
 		  $("#logBtn").click(function(){
             $("#logModal").modal();
 		  });
@@ -40,14 +39,11 @@ $(function () {
 			var id = $(identifier).attr("data-id");
 			var submissions = arr.events[id]['submissions'];
 			var tmp = "";
-			for(var i = 0; i < submissions.length; i++){
+			for(var i = 0; i < submissions.length; i++)
 				tmp += '<a href="#" class="list-group-item" data-id="' + i +'"'+' data-eventid="' + id + '" onclick="openArticle(this)" >'+submissions[i]['title']+'</a>';
-			}
 			$("#articles").html(tmp);
-			
 		}
 		
-        
         function changeArticle(){
             $( "#RASHhead" ).empty();
             $( "#paperdiv" ).empty();
@@ -62,13 +58,11 @@ $(function () {
             jQuery.ajax({
                 url:submission[articleN]['url'], 
                 success:function( data ) {
-                        var tmpdiv=document.createElement( "div" );
-                        $(tmpdiv).html(data);
-                        jQuery.each($(tmpdiv).children().filter("section"),function(index,value){$("#paperdiv").append($( this ));});
-                        jQuery.each($(tmpdiv).children().filter("title"),function(index,value){$("#RASHhead").append($( this ));});
-                        jQuery.each($(tmpdiv).children().filter("meta"),function(index,value){$("#RASHhead").append($( this ));});
-                        jQuery.each($(tmpdiv).children().filter("#voti"),function(index,value){$("#RASHhead").append($(this ));});
-                        $("#RASHhead").append('<script src="js/rash.js"> </script>');
+					jQuery.each($(data).filter("section"),function(index,value){$("#paperdiv").append($( this ));});
+					jQuery.each($(data).filter("title"),function(index,value){$("#RASHhead").append($( this ));});
+					jQuery.each($(data).filter("meta"),function(index,value){$("#RASHhead").append($( this ));});
+					jQuery.each($(data).filter("#voti"),function(index,value){$("#RASHhead").append($(this ));});
+					$("#RASHhead").append('<script src="js/rash.js"> </script>');
                 },
                 async: true
             });
