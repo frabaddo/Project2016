@@ -21,6 +21,9 @@ body { font-size: 12pt; }
 /* /END Font */
 
 /* URL visualization */
+#paperdiv{
+    word-wrap: break-word;
+}
 
 a,span{
     white-space: pre-wrap; /* css-3 */    
