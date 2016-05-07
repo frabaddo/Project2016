@@ -1,0 +1,88 @@
+
+	{
+		"events": [{
+			"conference": "International Semantic Web Conference 2016",
+			"acronym": "ISWC 2016",
+			"chairs":
+			[
+				"John Smith <john@smith.com>",
+				"Steve Green <steve@green.com>"
+			],
+			"pc_members":
+			[{
+				"name": "Silvio Peroni <silvio@peroni.it>",
+				"assignments": ["1", "5", "7"],
+				"done": ["5", "7"]
+			}],
+			"submissions":
+			[
+			{
+				"id": "1",
+				"title": "Some stuff",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/evaluating-citation-functions-in-cito.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			},
+			{
+				"id": "2",
+				"title": "Some stuff2",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/prova2.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			}
+			]
+		},
+		{
+			"conference": "Web Conference 2",
+			"acronym": "ISWC 2016",
+			"chairs":
+			[
+				"John Smith <john@smith.com>",
+				"Steve Green <steve@green.com>"
+			],
+			"pc_members":
+			[{
+				"name": "Silvio Peroni <silvio@peroni.it>",
+				"assignments": ["1", "5", "7"],
+				"done": ["5", "7"]
+			}],
+			"submissions":
+			[
+			{
+				"id": "1",
+				"title": "Article 1",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/diiorio-iswc2015.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			},
+			{
+				"id": "2",
+				"title": "Article 2",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/prova2.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			}
+			]
+		}
+		]
+	}
