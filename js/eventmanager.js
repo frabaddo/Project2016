@@ -24,14 +24,18 @@ $(function () {
 var arr;
 // funzione per caricare la lista Eventi all'apertura della pagina
 $(document).ready(function (e) {
-	var text = $("#data").html();
-	arr = JSON.parse(text);
-	//alert(arr.events[0]['conference']);
-	for(var i = 0; i < arr.events.length; i++)
-		$('#events').append('<li><a href="#" data-id="' + i + '" onclick="selectEvent(this)" >'+arr.events[i]['conference']+'</a></li>');
-  $("#logBtn").click(function(){
-	$("#logModal").modal();
-  });
+    $.getJSON( "conference.json", function( data ) {
+        arr=data;    
+        for(var i = 0; i < arr.events.length; i++){
+            $('#events').append('<li><a href="#" data-id="' + i + '" onclick="selectEvent(this)" >'+arr.events[i]['conference']+'</a></li>');
+        }
+    })
+    .fail(function() {
+        alert( "conference.json not found" );
+    })
+    $("#logBtn").click(function(){
+	   $("#logModal").modal();
+    });
 });
 
 function selectEvent(identifier)
