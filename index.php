@@ -17,10 +17,104 @@ prefix="
     <link rel="stylesheet" type="text/css" href="css/style-article.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			var annotations = [];
+			var username = "<?php echo $_SESSION['username'] ?>";
+		</script>
     <script type="text/javascript" src="js/menu.js"></script>
     <script type="text/javascript" src="js/eventmanager.js"></script>
     <script>
-	var annotations = [{}]
+	//var annotations = [{}]
+    </script>
+    <script id="data" type=”application/ld+json”>
+	{
+		"events": [{
+			"conference": "International Semantic Web Conference 2016",
+			"acronym": "ISWC 2016",
+			"chairs":
+			[
+				"John Smith <john@smith.com>",
+				"Steve Green <steve@green.com>"
+			],
+			"pc_members":
+			[{
+				"name": "Silvio Peroni <silvio@peroni.it>",
+				"assignments": ["1", "5", "7"],
+				"done": ["5", "7"]
+			}],
+			"submissions":
+			[
+			{
+				"id": "1",
+				"title": "Some stuff",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/evaluating-citation-functions-in-cito.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			},
+			{
+				"id": "2",
+				"title": "Some stuff2",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/prova2.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			}
+			]
+		},
+		{
+			"conference": "Web Conference 2",
+			"acronym": "ISWC 2016",
+			"chairs":
+			[
+				"John Smith <john@smith.com>",
+				"Steve Green <steve@green.com>"
+			],
+			"pc_members":
+			[{
+				"name": "Silvio Peroni <silvio@peroni.it>",
+				"assignments": ["1", "5", "7"],
+				"done": ["5", "7"]
+			}],
+			"submissions":
+			[
+			{
+				"id": "1",
+				"title": "Article 1",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/diiorio-iswc2015.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			},
+			{
+				"id": "2",
+				"title": "Article 2",
+				"authors": ["Mary Lamb <mary@lamb.com>"],
+				"url": "RASH/prova2.html",
+				"reviewers":
+				[
+					"Silvio Peroni <silvio@peroni.it>",
+					"Angelo Di Iorio <angelo@diiorio.it>"
+				],
+				"done": ["Angelo Di Iorio <angelo@diiorio.it>"]
+			}
+			]
+		}
+		]
+	}
+
     </script>
     <script id="voti" type=”application/ld+json”>
 	[{
@@ -41,21 +135,25 @@ prefix="
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Rash Project</a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <?php if(isset($_SESSION['username'])){ ?>
-                                <li><a href="#"><?php echo $_SESSION['username'] ?></a></li>
-                                <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                                <?php } else { ?>
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a></li>
-                                <li><a href="#" id="logBtn"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                                <?php } ?>
-                            </ul>
-                        </div>
-
+											<div class="navbar-header">
+													<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+														<span class="icon-bar"></span>
+														<span class="icon-bar"></span>
+														<span class="icon-bar"></span>
+													</button>
+													<a class="navbar-brand" href="#">Rash Project</a>
+											</div>
+											<div class="collapse navbar-collapse" id='myNavbar'>
+												<ul class="nav navbar-nav navbar-right">
+														<?php if(isset($_SESSION['username'])){ ?>
+														<li><a href="#"><?php echo $_SESSION['username'] ?></a></li>
+														<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+														<?php } else { ?>
+														<li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a></li>
+														<li><a href="#" id="logBtn"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+														<?php } ?>
+												</ul>
+											</div>
                     </div>
                 </nav>
             </div>
@@ -111,24 +209,21 @@ prefix="
         </div>
         <!-- BODY !-->
         <div class="row">
-            <!-- ASIDE !-->
-        	 <div style="z-index: 1001" class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Select events
-					<span class="caret"></span>
-				</button>
-				<ul id="events" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					<li class="dropdown-header">Events</li>
-				</ul>
-			</div>
-			<div id="articles" class="list-group"></div>
-			<div class="list-group">
-				<a href="#" class="list-group-item">Annotation 1</a>
-				<a href="#" class="list-group-item">Annotation 2</a>
-				<a href="#" class="list-group-item">Annotation 3</a>
-			</div>
-		</div>
+          <!-- ASIDE !-->
+        	<div  class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="padding-top: 10px;">
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Select events
+								<span class="caret"></span>
+							</button>
+							<ul id="events" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li class="dropdown-header">Events</li>
+							</ul>
+						</div>
+						<div id="articles" class="list-group"></div>
+						<div class="container-fluid"><p>Annotations</p></div>
+						<div id="annotationsMenu" class="list-group"></div>
+					</div>
             <!-- SECTION !-->
             <div class="col-sm-9 col-md-9 col-lg-9">
                 <nav class="navbar">
