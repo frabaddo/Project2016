@@ -115,12 +115,13 @@ function storeAnnotation(text){
 		"@id": "#article1",
 		"text": text,
 		"ref": "#id_element",
-		"author": "mailto:john@smith.com",
+		"author": 'mailto:'+username,
 		"date": Date.now()
 	});
 	//date:  "2016-01-16T11:54:26"
 	var text = JSON.stringify(annotations);
  	alert(text);
+	showAnnotations();
  }
 function storeScore(text){
  	annotations.push(
@@ -145,7 +146,7 @@ function storeOpinion(text){
  		"@id": "#article1",
  		"text": text,
  		"ref": "#id_element",
- 		"author": "mailto:john@smith.com",
+ 		"author": "mailto:"+userName,
  		"date": Date.now()
  	});
  	//date:  "2016-01-16T11:54:26"
@@ -160,7 +161,7 @@ function storeDecision(text){
  		"@id": "#article1",
  		"text": text,
  		"ref": "#id_element",
- 		"author": "mailto:john@smith.com",
+ 		"author": "mailto:"+username,
  		"date": Date.now()
  	});
  //date:  "2016-01-16T11:54:26"
@@ -175,4 +176,13 @@ function createAnnotation() {
 		 alert(response);
 	   }
 	});
+}
+function showAnnotations()
+{
+	var tmp = "";
+	for(var i = 0; i < annotations.length; i++){
+		var aName = annotations[i]['text'].substring(0,25);
+		tmp += '<a href="#" data-toggle="tooltip" title="'+aName+'" class="list-group-item">'+aName+'....'+'</a>';
+	}
+	$("#annotationsMenu").html(tmp);
 }
