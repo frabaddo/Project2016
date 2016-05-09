@@ -34,7 +34,7 @@ function openArticle(identifier){
 	var articleN= $(identifier).attr('data-id');
 	var submission = conferences.events[eventN]['submissions'];
 	jQuery.ajax({
-		url:submission[articleN]['url'], 
+		url:"RASH/"+submission[articleN]['url'], 
 		success:function( data ) {
 			jQuery.each($(data).filter("section"),function(index,value){$("#paperdiv").append($( this ));});
 			jQuery.each($(data).filter("title"),function(index,value){$("#RASHhead").append($( this ));});
