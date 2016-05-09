@@ -9,6 +9,8 @@ $(document).ready(function (e){
     .fail(function() {
         alert( "conference.json not found" );
     })
+    $("#logBtn").click(function(){
+    $("#logModal").modal();
 });
 
 function selectEvent(identifier){
