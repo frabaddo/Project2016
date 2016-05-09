@@ -10,7 +10,8 @@ $(document).ready(function (e){
         alert( "conference.json not found" );
     })
     $("#logBtn").click(function(){
-    $("#logModal").modal();
+    	$("#logModal").modal();
+    })
 });
 
 function selectEvent(identifier){
