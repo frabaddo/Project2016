@@ -1,14 +1,14 @@
 var conferences;
 // funzione per caricare la lista Eventi all'apertura della pagina
 $(document).ready(function (e){
-	var text = $("#data").html();
-	conferences = JSON.parse(text);
-	//alert(arr.events[0]['conference']);
-	for(var i = 0; i < conferences.events.length; i++)
-		$('#events').append('<li><a href="#" data-id="' + i + '" onclick="selectEvent(this)" >'+conferences.events[i]['conference']+'</a></li>');
-  $("#logBtn").click(function(){
-	$("#logModal").modal();
-  });
+    $.getJSON( "conference.json", function( data ) {
+        conferences=data;    
+        for(var i = 0; i < conferences.events.length; i++)
+            $('#events').append('<li><a href="#" data-id="' + i + '" onclick="selectEvent(this)" >'+conferences.events[i]['conference']+'</a></li>');
+    })
+    .fail(function() {
+        alert( "conference.json not found" );
+    })
 });
 
 function selectEvent(identifier){
@@ -48,7 +48,7 @@ function openArticle(identifier){
 function loadAnnotations(data){
 	var text = $(data).filter("#data").html();
 	var annotations = JSON.parse(text);
-	for(var i=0; i < annotations.length; i++){
+	for(var i=0; i < annotations.length; i++){		
 		//se l'autore dell'annotazione è uguale all'utente mostra le annotazioni in giallo
 		//altrimenti mostra le annotazioni di un'altro colore
 		$(annotations[i]['ref']).attr('class', annotations[i]['@type']);
