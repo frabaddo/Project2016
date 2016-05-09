@@ -117,7 +117,7 @@ prefix="
         <!-- BODY !-->
         <div class="row">
           <!-- ASIDE !-->
-        	<div  class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="padding-top: 10px;">
+        	<div  class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="padding-top: 10px;z-index:1001">
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Select events
