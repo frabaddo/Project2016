@@ -17,10 +17,11 @@ prefix="
     <link rel="stylesheet" type="text/css" href="css/style-article.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			var annotations = [];
-			var username = "<?php echo $_SESSION['username'] ?>";
-		</script>
+	<script type="text/javascript">
+		var annotations = [];
+		//var username = "a";
+		//var username = "<?php echo $_SESSION['username'] ?>";
+	</script>
     <script type="text/javascript" src="js/menu.js"></script>
     <script type="text/javascript" src="js/eventmanager.js"></script>
     <script id="voti" type=”application/ld+json”>
