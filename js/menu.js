@@ -133,17 +133,18 @@ function creaAnnotation(){
 		//alert("paragraph: " + paragraphText);
 		//alert("selected text: " + selectedText);
 		//alert("tag: " + selectedNode.tagName);
+		//alert(paragraphText == selectedText);
 		
-		/*if ((start.innerHTML == selectedText || end.innerHTML == selectedText) && start.innerHTML == end.innerHTML) {
-			alert(start.id);
-			if (start.id != ""){
-				var myID = document.createElement("id");
-				myID.setAttribute(ID, "mmm");
-				var ancestor = currSelection.getRangeAt(0).commonAncestorContainer;
-				ancestor.parentNode.replaceChild(span, ancestor);
+		//se selezioni un testo racchiuso tra 2 tag, basta aggiungere l'id
+		if (paragraphText == selectedText){
+			var id = selectedNode.getAttributeNode("id");
+			if (id == null){
+				selectedNode.setAttribute("id", "prova"); //ID INCREMENTALE
+				selectedNode.setAttribute("style", "background-color:Yellow");
+				storeAnnotation("prova","autore",selectedText);
 			}
 		}
-		else{*/
+		else{
 			//var selectionContents = currSelection.getRangeAt(0).extractContents().innerHTML;
 			alert(selectedText);
 			//alert(selectionContents);
@@ -161,7 +162,7 @@ function creaAnnotation(){
 			//alert("in node: " + node.innerHTML);
 			selectedNode.parentNode.replaceChild(node, selectedNode);
 			storeAnnotation("prova","autore",selectedText);
-		//}
+		}
 		//alert(start.innerHTML.indexOf(currSelection.toString()) > -1);
 	}
 }
@@ -247,7 +248,4 @@ function showAnnotations()
 		tmp += '<a href="#" data-toggle="tooltip" title="'+aName+'" class="list-group-item">'+aName+'...'+'</a>';
 	}
 	$("#annotationsMenu").html(tmp);
-}
-function countID(){
-	
 }
