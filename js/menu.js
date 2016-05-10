@@ -172,12 +172,13 @@ function storeAnnotation(id_element,author,text){
 	{
 		"@context": "easyrash.json",
 		"@type": "comment",
-		"@id": "#article1",
+		"@id": "#review-c"+"1",
 		"text": text,
 		"ref": id_element,
 		"author": 'mailto:'+username,
 		"date": Date.now()
 	});
+	//"@context": "http://vitali.web.cs.unibo.it/twiki/pub/TechWeb16/context.json",
 	//date:  "2016-01-16T11:54:26"
 	var text = JSON.stringify(annotations);
  	alert(text);
@@ -243,7 +244,7 @@ function showAnnotations()
 	var tmp = "";
 	for(var i = 0; i < annotations.length; i++){
 		var aName = annotations[i]['text'].substring(0,25);
-		tmp += '<a href="#" data-toggle="tooltip" title="'+aName+'" class="list-group-item">'+aName+'....'+'</a>';
+		tmp += '<a href="#" data-toggle="tooltip" title="'+aName+'" class="list-group-item">'+aName+'...'+'</a>';
 	}
 	$("#annotationsMenu").html(tmp);
 }
