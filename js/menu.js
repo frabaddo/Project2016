@@ -183,47 +183,48 @@ function storeAnnotation(id_element,author,text){
  	alert(text);
 	showAnnotations();
  }
-function storeScore(text){
+//score from reviewer
+function storeReview(text){
  	annotations.push(
 	{
- 		"@context": "easyrash.json",
- 		"@type": "score",
- 		"@id": "#article1",
- 		"text": text,
- 		"ref": "#id_element",
- 		"author": "mailto:john@smith.com",
- 		"date": Date.now()
- 	});
+			"@context": "http://vitali.web.cs.unibo.it/twiki/pub/TechWeb16/context.json",
+			"@type": "review",
+			"@id": "#review1",
+			"article": {
+				"@id": "", 
+				"eval": {
+					"@id": "#review1-eval",
+					"@type": "score",
+					"status": "pso:accepted-for-publication",
+					"author": "mailto:silvio.peroni@unibo.it",
+					"date": "2016-01-16T12:34:56"
+				}
+			},
+			"comments": [ "#review1-c1" , "#review1-c2" ]
+		});
  	//date:  "2016-01-16T11:54:26"
  	var text = JSON.stringify(annotations);
  	alert(text);
  }
-function storeOpinion(text){
- 	annotations.push(
- 	{
- 		"@context": "easyrash.json",
- 		"@type": "opinion",
- 		"@id": "#article1",
- 		"text": text,
- 		"ref": "#id_element",
- 		"author": "mailto:"+userName,
- 		"date": Date.now()
- 	});
- 	//date:  "2016-01-16T11:54:26"
- 	var text = JSON.stringify(annotations);
- 	alert(text);
- }
+//decision from chair
 function storeDecision(text){
  	annotations.push(
  	{
- 		"@context": "easyrash.json",
- 		"@type": "decision",
- 		"@id": "#article1",
- 		"text": text,
- 		"ref": "#id_element",
- 		"author": "mailto:"+username,
- 		"date": Date.now()
- 	});
+		"@context": "http://vitali.web.cs.unibo.it/twiki/pub/TechWeb16/context.json",
+		"@type": "decision",
+		"@id": "#decision1",
+		"article": {
+			"@id": "",
+			"eval": {
+				"@context": "easyrash.json",
+				"@id": "#decision1-eval",
+				"@type": "score",
+				"status": "pso:accepted-for-publication",
+				"author": "mailto:fabio.vitali@unibo.it",
+				"date": "2016-01-18T13:32:11"
+			}
+		}
+	});
  //date:  "2016-01-16T11:54:26"
  var text = JSON.stringify(annotations);
  	alert(text);
