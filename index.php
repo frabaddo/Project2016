@@ -149,7 +149,7 @@ prefix="
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Save Changes</a>
+                                    <a href="#" onclick="storeAnnotation()">Save Changes</a>
                                 </li>
                                 <li>
                                     <a href="#">Filter annotation type</a>
@@ -178,7 +178,7 @@ prefix="
                             <textarea class="form-control" style="min-width: 100%" id="textareaID" placeholder="Insert your annotation here."></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button onclick="storeAnnotation(document.getElementById('textareaID').value)" class="btn btn-default btn-success" data-dismiss="modal">Ok</button>
+                            <button onclick="creaAnnotation(document.getElementById('textareaID').value)" class="btn btn-default btn-success" data-dismiss="modal">Ok</button>
                             <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
