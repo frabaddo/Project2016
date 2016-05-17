@@ -106,7 +106,7 @@ jQuery.fn.extend({
         $("p.keywords").remove();
     
         /* Header title */
-        var header = $("<header class=\"page-header cgen\"></header>");
+        var header = $("<header class=\"page-header cgen noselect \"></header>"); //aggiunto noselect per rendere non selezionabile (Sinagra)
         header.prependTo($("#paperdiv"))            //modificare per avere l'header nel div  baddo
         var title_string = "";
         var title_split = $("#RASHhead title").html().split(" -- ");     //BADDO
