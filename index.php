@@ -17,18 +17,13 @@ prefix="
     <link rel="stylesheet" type="text/css" href="css/style-article.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		var annotations = [];
-		//var username = "a";
-		//var username = "<?php echo $_SESSION['username'] ?>";
-	</script>
     <script type="text/javascript" src="js/menu.js"></script>
     <script type="text/javascript" src="js/eventmanager.js"></script>
     <script id="voti" type=”application/ld+json”>
 	[{
 		"@context": "easyrash.json",
 		"@type": "comment",
-		"@id": "#article1",
+		"@id": "#review",
 		"text": "The text of the comment referring to a fragment (i.e., a 'p')",
 		"ref": "#prova",
 		"author": "mailto:john@smith.com",
@@ -144,7 +139,7 @@ prefix="
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Actions<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#" type="button" class="btn" data-toggle="modal" data-target="#createAnnotation">Create Annotation</a></li>
+                                        <li><a href="#" type="button" class="btn" data-toggle="modal" onclick="beginAnnotation();">Create Annotation</a></li>
                                         <li><a href="#" type="button" class="btn" data-toggle="modal" data-target="#reviewArticle">Review Article</a></li>
                                         <li><a href="#" type="button" class="btn" data-toggle="modal" data-target="#chairArticle">Chair Article</a></li>
                                     </ul>

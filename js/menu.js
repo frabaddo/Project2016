@@ -1,7 +1,8 @@
-var selectedText;
+var selectedText = "";
 var selectedNode;
 var annotations = [];
 var username = "a";
+var startOffset;
 
 function Highlight(){
 	var currSelection = window.getSelection();
@@ -9,76 +10,28 @@ function Highlight(){
 		var start = currSelection.getRangeAt(0).startContainer.parentNode;
 		var end = currSelection.getRangeAt(0).endContainer.parentNode;
 		var ancestor = currSelection.getRangeAt(0).commonAncestorContainer;
-		
+		startOffset = currSelection.getRangeAt(0).startOffset;
 		//alert(start.innerHTML);
 		//alert(end);
 		//alert(ancestor.innerHTML);
-		
-		/* MANAGE METADATA
-		if (start.className == "title" || start.parentNode.className == "title")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(start);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
+		//alert("start: " + startOffset + " end: " + endOffset);
+		var ignore = ["cgen", "title", "author_name", "email", "lead authors", "keywords", "acm_subject_categories"];
+		for (var i = 0; i < ignore.length; i++) {
+			if (start.parentNode.className.indexOf(ignore[i]) > -1 || end.parentNode.className.indexOf(ignore[i]) > -1){
+					currSelection.removeAllRanges();
+					return;
+				}
 		}
-		else if (end.className == "title" || end.parentNode.className == "title")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(end);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		if (start.className == "author_name")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(start);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		else if (end.className == "author_name")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(end);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		if (start.parentNode.className == "email")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(start);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		else if (end.parentNode.className == "email")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(end);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		if (start.className == "affiliation")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(start);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		else if (end.className == "affiliation")
-		{
-			var range = document.createRange();
-			range.selectNodeContents(end);
-			currSelection.removeAllRanges();
-			currSelection.addRange(range);
-		}
-		
-		else 
-			
+		//ATTENZIONE: i valori delle keywords non hanno classname!!
+		/* GLI AUTORI NON HANNO CGEN???
+		alert(start.className);
+		alert(start.parentNode.className);
+		alert(end.className);
+		alert(end.parentNode.className);
 		*/
 		if (start.innerHTML == end.innerHTML)
 			selectedNode = start;
 		else if (ancestor.innerHTML == start.innerHTML){//il padre è lo start
-			//alert("b");
 			while (end.parentNode != start)
 				end = end.parentNode;
 			
@@ -86,7 +39,6 @@ function Highlight(){
 			addSelection(currSelection, end);
 		}
 		else if (ancestor.innerHTML == end.innerHTML){//il padre è l'end
-			//alert("c");
 			while (start.parentNode != end)
 				start = end.parentNode;
 			
@@ -94,7 +46,6 @@ function Highlight(){
 			addSelection(currSelection, start);
 		}
 		else{
-			//alert("d");
 			currSelection.removeAllRanges();
 			addSelection(currSelection, ancestor);
 			selectedNode = currSelection;
@@ -103,6 +54,7 @@ function Highlight(){
 		selectedText = getSelectionHtml();
 		//alert(selectedNode.innerHTML);
 	}
+	else selectedText = "";
 }
 function addSelection(currSelection, item){
 	var range = document.createRange();
@@ -127,6 +79,12 @@ function getSelectionHtml() {
     }
     return html;
 }
+function beginAnnotation(){
+	if (selectedText.length > 0)
+		$('#createAnnotation').modal();
+	else
+		alert("you must select some text to review.");
+}
 function creaAnnotation(){
 	if (selectedText != "") {
 		var paragraphText = selectedNode.innerHTML;
@@ -150,7 +108,7 @@ function creaAnnotation(){
 			//alert(selectionContents);
 			var node = document.createElement(selectedNode.tagName);
 			var stringa = "";
-			var index = paragraphText.search(selectedText);
+			var index = paragraphText.indexOf(selectedText, startOffset);
 			alert("index: " + index);
 			stringa += paragraphText.substring(0, index);
 			stringa += "<span style='background-color:Yellow;'>"+selectedText+"</span>";
@@ -240,8 +198,7 @@ function createAnnotation() {
 	   }
 	});
 }
-function showAnnotations()
-{
+function showAnnotations(){
 	var tmp = "";
 	for(var i = 0; i < annotations.length; i++){
 		var aName = annotations[i]['text'].substring(0,25);
