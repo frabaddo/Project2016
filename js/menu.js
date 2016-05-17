@@ -16,7 +16,24 @@ function Highlight(){
 		//alert(ancestor.innerHTML);
 		//alert("start: " + startOffset + " end: " + endOffset);
 		var ignore = ["cgen", "title", "author_name", "email", "lead authors", "keywords", "acm_subject_categories"];
-		for (var i = 0; i < ignore.length; i++) {
+		for (var i = 0; i < ignore.length; i++)
+			if (start.className.indexOf(ignore[i]) > -1 || end.className.indexOf(ignore[i]) > -1)
+			{
+				currSelection.removeAllRanges();
+				return;
+			}
+		/* tecnicamente se il noselect funziona su tutti i browser questa parte non serve (PER ORA NON CANCELLARE)
+		var node = start;
+		while (node.id != "paperdiv"){
+			for (var i = 0; i < ignore.length; i++) {
+				if (node.className.indexOf(ignore[i]) > -1){
+					currSelection.removeAllRanges();
+					return;
+				}
+			}
+			node = node.parentNode;
+		}
+		/*for (var i = 0; i < ignore.length; i++) {
 			if (start.parentNode.className.indexOf(ignore[i]) > -1 || end.parentNode.className.indexOf(ignore[i]) > -1){
 					currSelection.removeAllRanges();
 					return;
