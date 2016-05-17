@@ -34,35 +34,35 @@ prefix="
 <body>
     <div class="container-fluid">
         <!-- NAV !-->
-        <div class="row">
+        <div class="row noselect">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
-											<div class="navbar-header">
-												<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-														<span class="icon-bar"></span>
-														<span class="icon-bar"></span>
-														<span class="icon-bar"></span>
-													</button>
-													<a class="navbar-brand" href="#">Rash Project</a>
-											</div>
-											<div class="collapse navbar-collapse" id='myNavbar'>
-												<ul class="nav navbar-nav navbar-right">
-														<?php if(isset($_SESSION['username'])){ ?>
-														<li><a href="#"><?php echo $_SESSION['username'] ?></a></li>
-														<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-														<?php } else { ?>
-														<li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a></li>
-														<li><a href="#" id="logBtn"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-														<?php } ?>
-												</ul>
-											</div>
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">Rash Project</a>
+						</div>
+						<div class="collapse navbar-collapse" id='myNavbar'>
+							<ul class="nav navbar-nav navbar-right">
+									<?php if(isset($_SESSION['username'])){ ?>
+									<li><a href="#"><?php echo $_SESSION['username'] ?></a></li>
+									<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+									<?php } else { ?>
+									<li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up </a></li>
+									<li><a href="#" id="logBtn"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+									<?php } ?>
+							</ul>
+						</div>
                     </div>
                 </nav>
             </div>
         </div>
         <!-- LOGIN !-->
-        <div class="modal fade" id="logModal" role="dialog">
+        <div class="modal fade noselect" id="logModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -113,7 +113,7 @@ prefix="
         <!-- BODY !-->
         <div class="row">
           <!-- ASIDE !-->
-        	<div  class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="padding-top: 10px;z-index:1001">
+        	<div  class="col-xs-12 col-sm-3 col-md-3 col-lg-3 noselect" style="padding-top: 10px;z-index:1001">
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Select events
@@ -129,7 +129,7 @@ prefix="
 					</div>
             <!-- SECTION !-->
             <div class="col-sm-9 col-md-9 col-lg-9">
-                <nav class="navbar">
+                <nav class="navbar noselect">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <a class="navbar-brand" href="#">User Name</a>
