@@ -1,3 +1,4 @@
+"use strict";
 class Conference {
 	constructor(conf) {
 		this.conference = conf['conference'];
