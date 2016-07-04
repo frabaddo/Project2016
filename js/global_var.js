@@ -11,3 +11,4 @@ var confs  = [];
 var confN;
 var articleN;
 var annotationN;
+var locked;
