@@ -88,6 +88,7 @@ function openArticle(id){
 				showAnnotations(); //funzione che si occupa di visualizzare le annotazioni (modificando il DOM)				
 			}
 		});
+	$("#accessorybutton").show();	
         return true;
 	}
     else return false;
