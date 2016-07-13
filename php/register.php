@@ -10,7 +10,7 @@
 	
 	if(strcmp($pass, $cPass)){
 		$_SESSION['regError'] = 1;
-		header('Location: index.php');
+		header('Location: ../index.php');
 		exit;
 	}
 	
@@ -20,7 +20,7 @@
 	foreach ($users as $user) {
 		if(!strcmp($user['email'], $email)){
 			$_SESSION['regError'] = 2;
-			header('Location: index.php');
+			header('Location: ../index.php');
 			exit;
 		}
 	}
