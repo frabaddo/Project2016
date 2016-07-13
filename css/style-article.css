@@ -1,0 +1,125 @@
+.comment /* per i commenti salvati */
+{
+    background-color:#b3ffe6;
+	cursor: pointer;
+}
+.tmpcomment /* per i commenti in cache non ancora salvati */
+{
+	background-color: #ffd1b3;
+	cursor: pointer;
+}
+*{ /* for all */
+	background-color: inherit;
+	cursor: inherit;
+}
+#reviewers
+{ 
+	text-align: center;
+	font-weight: bold;
+}
+#reviews li
+{
+	margin:0 20px 20px 0; 
+	vertical-align:top;
+	text-align: center;
+	list-style-type: none;
+}
+.modal-header, h4, .close {
+	background-color: #5cb85c;
+	color:white !important;
+	text-align: center;
+	font-size: 30px;
+}
+.modal-footer {
+	background-color: #f9f9f9;
+}
+.navbar {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+	letter-spacing: 5px;	
+}
+.navbar-nav li a:hover {
+	color: #1abc9c !important;
+}
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+	-khtml-user-select: none;	   /* Konqueror */
+	-moz-user-select: none;	   /* Firefox */
+	-ms-user-select: none;	   /* Internet Explorer/Edge */
+	user-select: none;		   /* Non-prefixed version, currently
+								  not supported by any browser */
+}
+.navbarSmall{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.affix {
+	top:0;
+	width: 100%;
+	z-index: 1000 !important;
+}
+.affix ~ .container-fluid {
+	 position: relative;
+	 top: 50px;
+}
+#dropdownMenu1 {
+     width: 100%;
+}
+
+.list-group-item-warning {
+    background-color: #ffd1b3;
+}
+
+.list-group-item-success {
+    background-color: #b3ffe6;
+}
+
+/*#accessorybutton {
+   position: fixed;
+   left: 95%;
+   top: 87%;
+}*/
+
+a.list-group-item-warning:focus, a.list-group-item-warning:hover, button.list-group-item-warning:focus, button.list-group-item-warning:hover {
+    background-color: #ffc299;
+}
+
+a.list-group-item-success:focus, a.list-group-item-success:hover, button.list-group-item-success:focus, button.list-group-item-success:hover {
+    background-color: #80ffd4;
+}
+
+#menuNavbar{
+    padding-bottom: 0;
+    background-color:transparent;
+}
+
+#myNavbar2 > ul > li{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#menuButton{
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+#myNavbar2{
+    border-top-width: 0px;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #333;
+    background-color: #f2f2f2;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: white;
+}
+
+.dropdown-menu>li>a{
+    text-align: left;
+}
