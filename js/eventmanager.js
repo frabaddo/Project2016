@@ -2,6 +2,7 @@
 
 //{ CARICAMENTO INFO
 $(document).ready(function (e){
+	$("#accessorybutton").hide();//hide accessory button
 	getUserInfo(); //get current user info
 	loadConferences(); //load all conferences in combobox
 	document.getElementById("utente").innerHTML = userInfo['email']; //carica il nome dell'utente corrente
