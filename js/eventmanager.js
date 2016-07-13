@@ -104,6 +104,10 @@ function loadAnnotations(data, n){
 	);
 }
 
+function toX(x){
+    $('#'+x)[0].scrollIntoView( true );
+}
+
 function addMargin() {
     window.scrollTo(0, window.pageYOffset - 70);
     history.pushState("", document.title, window.location.pathname);
