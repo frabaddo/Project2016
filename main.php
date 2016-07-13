@@ -133,11 +133,11 @@
 				<div id="paperdiv" class="col-sm-9 col-md-9 col-lg-9" onmouseup="Highlight()">   
                 		</div>
                 		<div id="accessorybutton">
-                    			<div class="tomenu list-group-item list-group-item-menu">
-                        			<span onclick="toX('annotationsMenu')" class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    			<div onclick="toX('annotationsMenu')" class="tomenu list-group-item list-group-item-menu">
+                        			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     			</div>
-                    			<div class="tomenu list-group-item list-group-item-menu">
-                        			<span onclick='toX("dropdownMenu1")' class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    			<div onclick='toX("dropdownMenu1")' class="tomenu list-group-item list-group-item-menu">
+                        			<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
                     			</div>
                 		</div>
 			</div>
