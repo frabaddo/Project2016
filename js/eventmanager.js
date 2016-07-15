@@ -28,8 +28,7 @@ function selectConference(element){
 	confN = $(element).attr("data-id");
     articleN = -1;
 	var submissions = confs[confN].submissions;
-	var text = "";
-	
+	var text = "<a style='text-align: center;' class='list-group-item'>"+confs[confN]['conference']+"</a>";
 	for(var n = 0; n < submissions.length; n++){
 		$.ajax({
 			url:"RASH/"+submissions[n].url, 
@@ -41,14 +40,14 @@ function selectConference(element){
 		});
 		if (submissions[n].IsReviewer())
 			if (confs[confN].submissions[n].HaveReview())
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="if(openArticle(this)) hideMenuElements();" >'+confs[confN].submissions[n].title+'</a>';
+				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
 			else
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="if(openArticle(this)) hideMenuElements();" >'+confs[confN].submissions[n].title+'</a>';
+				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
 		else if (confs[confN].IsChair())
 			if (confs[confN].submissions[n].HaveDecision())
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="if(openArticle(this)) hideMenuElements();" >'+confs[confN].submissions[n].title+'</a>';
+				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
 			else
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="if(openArticle(this)) hideMenuElements();" >'+confs[confN].submissions[n].title+'</a>';
+				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
 	}
 	$("#articles").html(text);
 }
@@ -62,8 +61,7 @@ function resetArticle(){
 //funzione per caricare un articolo nel div
 function openArticle(id){
 	var r = true;
-	
-	if (locked == 0)
+	if (locked == 0 && changes != 0)
         r = confirm("Desideri uscire senza salvare?");
 	if (r == true){
 		resetArticle();
@@ -89,10 +87,10 @@ function openArticle(id){
 				showAnnotations(); //funzione che si occupa di visualizzare le annotazioni (modificando il DOM)				
 			}
 		});
-	$("#accessorybutton").show();	
-        return true;
+		changes = 0;
+		$("#accessorybutton").show();	
+        hideMenuElements();
 	}
-    else return false;
 }
 
 //funzione per caricare le annotazioni del documento

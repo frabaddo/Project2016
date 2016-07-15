@@ -1,17 +1,19 @@
 //{ FUNCTIONS FOR LAUNCH MODALS
 //apre la finestra modale per l'inserimento di annotazioni (reviewer & chair)
 function openAnnotation(){
-	if (window.getSelection().toString())
+	if (window.getSelection().toString()){
 		$('#createAnnotation').modal();
+		$("#textCREATE").val("");
+	}
 	else
 		alert("you must select some text to review.");
 }
 
 //apre la finestra modale per l'inserimento di una review dell'articolo (reviewer only)
 function openReview(){
-	alert(confs[confN].submissions[articleN].HaveReview());
 	if (confs[confN].submissions[articleN].IsReviewer() && !confs[confN].submissions[articleN].HaveReview()){
 		$('#reviewArticle').modal();
+		$("#opinionReview").val("");
 	}
 	else
 		alert("you have already review this article!");
@@ -20,8 +22,10 @@ function openReview(){
 //apre la finestra modale per l'inserimento di una decisione finale sull'articolo (chair only)
 function openDecision(){
 	if (confs[confN].IsChair() && !confs[confN].submissions[articleN].HaveDecision()){
-		if (confs[confN].submissions[articleN].ReviewComplete())
+		if (confs[confN].submissions[articleN].ReviewComplete()){
 			$('#chairArticle').modal();
+			$("#opinionChair").val("");
+		}
 		else
 			alert("this article is under review!");
 	}
@@ -79,6 +83,7 @@ var annotationsToSavetmp;
 var phpurl = 'phpsave.php';
 
 function applyChange(){
+	hideMenuElements(); //nasconde il menu
 	filetosave=$("#paperdiv");
 	
 	var elements = document.getElementsByClassName("comment");
@@ -111,6 +116,11 @@ function applyChange(){
 	saveNewFile();
 	
 	removeLock(confs[confN].submissions[articleN].url); //rimuove il lock
+	
+	if (confs[confN].IsReviewer() && confs[confN].submissions[articleN].HaveReview() ||
+		confs[confN].IsChair() && confs[confN].submissions[articleN].HaveDecision())
+		document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-success");
+		
 	openArticle(); //riapre l'articolo
 }
 function saveNewFile(){
@@ -175,28 +185,58 @@ function readerMode(){
 function hideMenuNavbar(){
 	$('#menuNavbar').hide();
 }
-function hideMenuElements(){
-	$('#annotatorBtn').show();
+function hideMenuElements(){	
+	$('#annotatorBtn').hide();
+	$('#scoreBtn').hide();
+	if (confs[confN].IsReviewer() && confs[confN].submissions[articleN].HaveReview()){
+		var eval = confs[confN].submissions[articleN].GetReviews()[0]['article']['eval'];
+		var vote = eval['status'].substring(4, eval['status'].length);
+		document.getElementById('scoreBtn').setAttribute("data-original-title", 'score:'+vote+' ' +eval['text']);
+		$('#scoreBtn').show();
+		$('#scoreBtn').tooltip();
+	}
+	else if (confs[confN].IsChair() && confs[confN].submissions[articleN].HaveDecision()){
+		var eval = confs[confN].submissions[articleN].GetDecision()['article']['eval'];
+		var vote = eval['status'].substring(4, eval['status'].length);
+		document.getElementById('scoreBtn').setAttribute("data-original-title", 'score:'+vote);
+		$('#scoreBtn').show();
+		$('#scoreBtn').tooltip();
+	}
+	else
+		$('#annotatorBtn').show();
+	
 	$('#readerBtn').hide();
 	$('#menuNavbar').show();
 	$('#saveChangesBtn').hide();
 	$('#filterAnnotationBtn').hide();
-	$('#actionsBtn').hide();
+	if (confs[confN].IsChair()){
+		$('#actionsBtn').show();
+		$('#viewReviewsBtn').show();
+	}
+	else{
+		$('#actionsBtn').hide();
+		$('#viewReviewsBtn').hide();
+	}
 	$('#reviewArticleBtn').hide();
 	$('#chairArticleBtn').hide();
 	$('#createAnnotationBtn').hide();
-	$('#viewReviewsBtn').hide();
 }
 function showMenuElements(){
 	$('#annotatorBtn').hide();
 	$('#readerBtn').show();
 	$('#actionsBtn').show();
-	$('#saveChangesBtn').show();
 	$('#createAnnotationBtn').show();
+	
+	if (changes != 0)
+		$('#saveChangesBtn').show();
+	else
+		$('#saveChangesBtn').hide();
+	
 	if (confs[confN].IsChair()){
 		$('#filterAnnotationBtn').show();
 		$('#viewReviewsBtn').show();
-		$('#chairArticleBtn').show();
+		if (confs[confN].submissions[articleN].ReviewComplete())
+			$('#chairArticleBtn').show();
 	} 
 	else{
 		$('#reviewArticleBtn').show();

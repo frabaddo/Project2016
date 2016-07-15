@@ -6,3 +6,4 @@ var annotationN; //annotazione N dell'articolo selezionata
 var selectedRange; //indica il range di selezione corrente
 var mantainLock; //timer di refresh
 var locked = 1; //se sei in modalità annotator (locked = 0)
+var changes = 0; //se sei in modalità annotator (locked = 0)

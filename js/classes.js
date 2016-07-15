@@ -103,6 +103,20 @@ function Submissions (conf, sub) {
 				}
 			}
 			return result;
+		},
+		
+		//ritorna la lista di revisioni (chair only)
+		GetDecision : function(){
+			var result;
+			for(var i = 0; i < this.annotations.length; i++){
+				for(var j = 0; j < this.annotations[i].length; j++){
+					var item = this.annotations[i][j];
+					if (item['@type'] == "decision"){
+						result = item;
+					}
+				}
+			}
+			return result;
 		}
 	};
 	return self;
