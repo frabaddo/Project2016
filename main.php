@@ -88,6 +88,7 @@
 						<li class="dropdown-header">Events</li>
 					</ul>
 				</div>
+				<div id="eventsMenu" class="list-group"></div>
 				<div id="articles" class="list-group"></div>
 				<div id="annotationsMenu" class="list-group"></div>
 			</div>
@@ -114,7 +115,7 @@
 									</ul>
 								</li>
 								<li>
-									<a class="list-group-item list-group-item-menu" id="saveChangesBtn" href="#" onclick="applyChange(); hideMenuElements();">Save Changes</a>
+									<a class="list-group-item list-group-item-menu" id="saveChangesBtn" href="#" onclick="applyChange();">Save & Exit</a>
 								</li>
 								
 								<li>
@@ -122,6 +123,9 @@
 								</li>
 								<li>
 									<a class="list-group-item list-group-item-menu" id="readerBtn" href="#" onclick="readerMode();">Reader</a>
+								</li>
+								<li>
+									<a class="list-group-item list-group-item-menu" id="scoreBtn" data-placement="right" href="#">Score</a>
 								</li>
 							</ul>
 						</div>
@@ -133,11 +137,11 @@
 				<div id="paperdiv" class="col-sm-9 col-md-9 col-lg-9" onmouseup="Highlight()">   
                 </div>
                 <div id="accessorybutton">
-                        <div title="Annotations" onclick="toX('annotationsMenu')" class="tomenu list-group-item list-group-item-menu">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						<div title="Go to Events" onclick='toX("dropdownMenu1")' class="tomenu list-group-item list-group-item-menu">
+                            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                         </div>
-                        <div title="Events" onclick='toX("dropdownMenu1")' class="tomenu list-group-item list-group-item-menu">
-                            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                        <div title="Go to Annotations" onclick="toX('annotationsMenu')" class="tomenu list-group-item list-group-item-menu">
+                            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
                         </div>
                 </div>
 			</div>
@@ -236,10 +240,10 @@
 								<div class="large-12 columns" style="text-align: center;display: inline-block;">
 									<div class="btn-group" id="score-decision" data-toggle="buttons">
 										<label class="btn btn-success active">
-											<input type="radio" name="options" value="1" checked /> Accept
+											<input type="radio" name="options" value="0" checked /> Accept
 										</label>
 										<label class="btn btn-danger">
-											<input type="radio" name="options" value="2" />	Reject
+											<input type="radio" name="options" value="1" />	Reject
 										</label>
 									</div>
 								</div>
