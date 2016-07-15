@@ -5,7 +5,7 @@
 }
 .tmpcomment /* per i commenti in cache non ancora salvati */
 {
-	background-color: #ffd1b3;
+	background-color: #f2dede;
 	cursor: pointer;
 }
 *{ /* for all */
@@ -79,9 +79,16 @@
     background-color: #b3ffe6;
 }
 
+.list-group-item-info {
+    background-color: Yellow;
+}
 
 a.list-group-item-warning:focus, a.list-group-item-warning:hover, button.list-group-item-warning:focus, button.list-group-item-warning:hover {
     background-color: #ffc299;
+}
+
+a.list-group-item-info:focus, a.list-group-item-info:hover, button.list-group-item-info:focus, button.list-group-item-info:hover {
+    background-color: Gold;
 }
 
 a.list-group-item-success:focus, a.list-group-item-success:hover, button.list-group-item-success:focus, button.list-group-item-success:hover {
