@@ -37,7 +37,7 @@ function deleteAnnotation(){
 	var span = document.getElementById(id.substring(1, id.length));
 	span.outerHTML = span.innerHTML;
 	showAnnotations();
-	changes--;
+	changes = 1;
 	showMenuElements();
 }
 //}
@@ -58,7 +58,7 @@ function storeAnnotation(id_element,text){
 		"date": new Date().toISOString()
 	});
 	showAnnotations();
-	changes++;
+	changes = 1;
 	showMenuElements();
 }
 
@@ -95,7 +95,7 @@ function storeReview(text){
 	});
 	//aggiorna lo status dell'articolo
 	document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-danger"); 
-	changes++;
+	changes = 1;
 	showMenuElements();
 }
 
@@ -124,7 +124,7 @@ function storeDecision(text){
 	});
 	//aggiorna lo status dell'articolo
 	document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-danger"); 
-	changes++;
+	changes = 1;
 	showMenuElements();
 }
 
