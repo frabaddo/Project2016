@@ -26,7 +26,9 @@ function modifyAnnotation(text){
 	var ref = confs[confN].submissions[articleN].annotations[user][annotationN]['ref'];
 	var id = ref.substring(1, ref.length); //rimuovi il cancelletto iniziale
 	document.getElementById(id).setAttribute("class", "comment tmpcomment");
+	changes = 1;
 	showAnnotations();
+	showMenuElements();
 }
 
 //cancella un'annotazione aperta nella finestra modale
@@ -37,6 +39,8 @@ function deleteAnnotation(){
 	var span = document.getElementById(id.substring(1, id.length));
 	span.outerHTML = span.innerHTML;
 	showAnnotations();
+	changes = 1;
+	showMenuElements();
 }
 //}
 
@@ -56,6 +60,8 @@ function storeAnnotation(id_element,text){
 		"date": new Date().toISOString()
 	});
 	showAnnotations();
+	changes = 1;
+	showMenuElements();
 }
 
 //push score in cache (reviewer only)
@@ -63,6 +69,7 @@ function storeReview(text){
 	var userN = selectUser();
 	var annotations = confs[confN].submissions[articleN].annotations;
 	var score = $('#score-review input:radio:checked').val();
+	var result = score ? score : 0;
 	
 	//lista dei commenti della revisione
 	var comments = [];
@@ -80,7 +87,7 @@ function storeReview(text){
 			"eval": {
 				"@id": "#review"+annotations[userN].length+"-eval",
 				"@type": "score",
-				"status": "pso:"+score,
+				"status": "pso:"+result,
 				"text": text,
 				"author": 'mailto:' + userInfo['email'],
 				"date": new Date().toISOString()
@@ -89,7 +96,9 @@ function storeReview(text){
 		"comments": comments
 	});
 	//aggiorna lo status dell'articolo
-	document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-success"); 
+	document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-danger"); 
+	changes = 1;
+	showMenuElements();
 }
 
 //push decision in cache (chair only)
@@ -97,8 +106,7 @@ function storeDecision(text){
 	var userN = selectUser();
 	var annotations = confs[confN].submissions[articleN].annotations;
 	var score = $('#score-decision input:radio:checked').val();
-	var result = score ? "reject-for-publication" : "accepted-for-publication";
-	
+	var result = (score == 0) ? "accepted-for-publication" : "reject-for-publication";
 	annotations[userN].push(
 	{
 		"@context": "http://vitali.web.cs.unibo.it/twiki/pub/TechWeb16/context.json",
@@ -117,13 +125,15 @@ function storeDecision(text){
 		}
 	});
 	//aggiorna lo status dell'articolo
-	document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-success"); 
+	document.getElementById('c'+ confN +'a'+articleN).setAttribute("class", "list-group-item list-group-item-danger"); 
+	changes = 1;
+	showMenuElements();
 }
 
 //show all annotations (chair & reviewer)
 function showAnnotations(){
 	var annotations = confs[confN].submissions[articleN].annotations;
-	var list = "";
+	var list = "<a style='text-align: center;' class='list-group-item'>Annotations</a>";
 	
 	for(var i = 0; i < annotations.length; i++)
 		for(var j = 0; j < annotations[i].length; j++){
@@ -142,11 +152,10 @@ function showAnnotations(){
 						list += '<a id="'+id+'left" href="'+item['ref']+'" title="'+item['author'].substring(7, item['author'].length)+'" class="list-group-item list-group-item-success">'+aName+'...'+'</a>';
 					}
 					else
-						list += '<a id="'+id+'left" href="'+item['ref']+'" title="'+item['author'].substring(7, item['author'].length)+'" class="list-group-item list-group-item-warning">'+aName+'...'+'</a>';
+						list += '<a id="'+id+'left" href="'+item['ref']+'" title="'+item['author'].substring(7, item['author'].length)+'" class="list-group-item list-group-item-danger">'+aName+'...'+'</a>';
 				}
 			}
 		}
-		list='<a style="text-align: center;" class="list-group-item">Annotations</a>'+list;
 	$("#annotationsMenu").empty();
 	$("#annotationsMenu").html(list);
 }

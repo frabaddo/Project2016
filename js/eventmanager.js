@@ -27,35 +27,39 @@ function loadConferences(){
 function selectConference(element){
 	confN = $(element).attr("data-id");
     articleN = -1;
-	var submissions = confs[confN].submissions;
-	var text = "<a style='text-align: center;' class='list-group-item'>"+confs[confN]['conference']+"</a>";
-	for(var n = 0; n < submissions.length; n++){
-		$.ajax({
-			url:"RASH/"+submissions[n].url, 
-			cache: false,
-			async: false,
-			success:function(data) {
-				loadAnnotations(data, n);			
-			}
-		});
-		if (submissions[n].IsReviewer())
-			if (confs[confN].submissions[n].HaveReview())
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
-			else
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
-		else if (confs[confN].IsChair())
-			if (confs[confN].submissions[n].HaveDecision())
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
-			else
-				text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
+	if (closeArticle()){
+		var submissions = confs[confN].submissions;
+		var text = "<a style='text-align: center;' class='list-group-item'>"+confs[confN]['conference']+"</a>";
+		for(var n = 0; n < submissions.length; n++){
+			$.ajax({
+				url:"RASH/"+submissions[n].url, 
+				cache: false,
+				async: false,
+				success:function(data) {
+					loadAnnotations(data, n);			
+				}
+			});
+			if (submissions[n].IsReviewer())
+				if (confs[confN].submissions[n].HaveReview())
+					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
+				else
+					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
+			else if (confs[confN].IsChair())
+				if (confs[confN].submissions[n].HaveDecision())
+					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
+				else
+					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
+		}
+		$("#articles").html(text);
 	}
-	$("#articles").html(text);
 }
 
 //effettua un reset delle view dell'articolo precedentemente
 function resetArticle(){
 	$( "#RASHhead" ).empty();
 	$( "#paperdiv" ).empty();
+	$("#annotationsMenu").empty();
+	hideMenuNavbar();
 }
 
 //funzione per caricare un articolo nel div
@@ -91,6 +95,22 @@ function openArticle(id){
 		$("#accessorybutton").show();	
         hideMenuElements();
 	}
+}
+
+function closeArticle(){
+	var r = true;
+	if (locked == 0 && changes != 0)
+        r = confirm("Desideri uscire senza salvare?");
+	if (r == true){
+		resetArticle();
+		
+		// se c'era un articolo selezionato, rimuove il lock sul vecchio articolo
+		if (locked == 0 && articleN >= 0)
+			removeLock(confs[confN].submissions[articleN].url);
+		
+		changes = 0;
+	}
+	return r;
 }
 
 //funzione per caricare le annotazioni del documento
