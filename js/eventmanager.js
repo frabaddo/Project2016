@@ -47,6 +47,8 @@ function selectConference(element){
 			else if (confs[confN].IsChair())
 				if (confs[confN].submissions[n].HaveDecision())
 					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-success" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
+				else if (confs[confN].submissions[n].ReviewComplete())
+					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-info" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
 				else
 					text += '<a id="c'+ confN +'a'+n+'" href="#" class="list-group-item list-group-item-warning" data-id="'+n+'" title="authors: '+ submissions[n].authors +'" onclick="openArticle(this);" >'+confs[confN].submissions[n].title+'</a>';
 		}
