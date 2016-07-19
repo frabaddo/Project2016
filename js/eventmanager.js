@@ -25,9 +25,9 @@ function loadConferences(){
 
 //funzione lanciata alla selezione di una conference
 function selectConference(element){
-	confN = $(element).attr("data-id");
-    articleN = -1;
 	if (closeArticle()){
+		confN = $(element).attr("data-id");
+		articleN = -1;
 		var submissions = confs[confN].submissions;
 		var text = "<a style='text-align: center;' class='list-group-item'>"+confs[confN]['conference']+"</a>";
 		for(var n = 0; n < submissions.length; n++){
