@@ -189,8 +189,10 @@ function hideMenuElements(){
 	$('#annotatorBtn').hide();
 	$('#scoreBtn').hide();
 	if (confs[confN].IsReviewer() && confs[confN].submissions[articleN].HaveReview()){
-		var eval = confs[confN].submissions[articleN].GetReviews()[0]['article']['eval'];
+		var eval = confs[confN].submissions[articleN].GetReview()['article']['eval'];
 		var vote = eval['status'].substring(4, eval['status'].length);
+		if (vote == 0)
+			vote = "REJECTED";
 		document.getElementById('scoreBtn').setAttribute("data-original-title", 'score:'+vote+' ' +eval['text']);
 		$('#scoreBtn').show();
 		$('#scoreBtn').tooltip();
