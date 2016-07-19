@@ -117,6 +117,17 @@ function Submissions (conf, sub) {
 				}
 			}
 			return result;
+		},
+		
+		//ritorna la revisione dell'utente (reviewer only)
+		GetReview : function(){
+			for(var i = 0; i < this.annotations.length; i++){
+				for(var j = 0; j < this.annotations[i].length; j++){
+					var item = this.annotations[i][j];
+					if (item['@type'] == "review" && item['article']['eval']['author'].indexOf(userInfo['email']) > -1)
+						return item;
+				}
+			}
 		}
 	};
 	return self;
